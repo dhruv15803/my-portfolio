@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dhruv Shetty - Full Stack Developer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .name {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .title {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #555;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 25px;
+            background: rgba(102, 126, 234, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: #667eea;
+        }
+
+        /* Projects Section */
+        .projects-section {
+            grid-column: 1 / -1;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .project-description {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .project-features {
+            list-style: none;
+            margin-bottom: 15px;
+        }
+
+        .project-features li {
+            padding: 4px 0;
+            color: #555;
+        }
+
+        .project-features li::before {
+            content: "→";
+            color: #667eea;
+            margin-right: 8px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .tech-tag {
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .project-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 8px;
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .project-link:hover {
+            color: #764ba2;
+            background: rgba(102, 126, 234, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .project-link i {
+            font-size: 0.9rem;
+        }
+
+
+        /* Skills */
+        .skills-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .skill-category {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .skill-category h4 {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background: #667eea;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        /* Education & Experience */
+        .timeline-item {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 3px solid #667eea;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 13px;
+            height: 13px;
+            background: #667eea;
+            border-radius: 50%;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .timeline-subtitle {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .timeline-date {
+            color: #999;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+
+        .timeline-description {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .timeline-description ul {
+            margin-left: 20px;
+            margin-top: 5px;
+        }
+
+        /* Certificates */
+        .cert-item {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .cert-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .cert-link {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .cert-link:hover {
+            color: #764ba2;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .name {
+                font-size: 2rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <div class="profile-img">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h1 class="name">Dhruv Shetty</h1>
+                <p class="title">Software Engineer</p>
+                <p style="color: #666; max-width: 600px; margin: 0 auto;">
+                    I’m a driven and adaptable software engineer who enjoys building practical solutions, writing clean code, and continuously learning to deliver reliable, user-focused products.
+                </p>
+                <div class="contact-info">
+                    <a href="mailto:Dhruvshetty960@gmail.com" class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        Dhruvshetty960@gmail.com
+                    </a>
+                    <a href="tel:9987391741" class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        9987391741
+                    </a>
+                    <a href="https://www.linkedin.com/in/dhruv-shetty-a715382a7/" class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        LinkedIn
+                    </a>
+                    <a href="https://github.com/dhruv15803" class="contact-item">
+                        <i class="fab fa-github"></i>
+                        GitHub
+                    </a>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Mumbai
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Education -->
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-graduation-cap"></i>
+                    Education
+                </h2>
+                <div class="timeline-item">
+                    <div class="timeline-title">Bachelor of Engineering</div>
+                    <div class="timeline-subtitle">Artificial Intelligence and Data Science</div>
+                    <div class="timeline-date">June 2025</div>
+                    <div class="timeline-description">
+                        <strong>Thadomal Shahani Engineering College</strong><br>
+                        CGPA: 7.64
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experience -->
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-briefcase"></i>
+                    Experience
+                </h2>
+                <div class="timeline-item">
+                    <div class="timeline-title">Software Engineer Intern</div>
+                    <div class="timeline-subtitle">PrepSOM Labs</div>
+                    <div class="timeline-date">Dec 2024 - March 2025</div>
+                    <div class="timeline-description">
+                        <ul>
+                            <li>Focused on full-stack development using modern web technologies</li>
+                            <li>Developed features using React, TypeScript, and Tailwind CSS</li>
+                            <li>Built RESTful APIs with Node.js and Express</li>
+                            <li>Integrated PostgreSQL and MongoDB databases</li>
+                            <li>Collaborated remotely to deliver high-quality solutions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills -->
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-code"></i>
+                    Skills
+                </h2>
+                <div class="skills-container">
+                    <div class="skill-category">
+                        <h4>Programming Languages</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">TypeScript</span>
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">Go</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">C#</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Technologies</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">MongoDB</span>
+                            <span class="skill-tag">PostgreSQL</span>
+                            <span class="skill-tag">REST APIs</span>
+                            <span class="skill-tag">Tailwind CSS</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">Cloudinary</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Tools</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">GitHub</span>
+                            <span class="skill-tag">VS Code</span>
+                            <span class="skill-tag">Postman</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certificates -->
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-certificate"></i>
+                    Certificates
+                </h2>
+                <div class="cert-item">
+                    <div class="cert-title">SQL Essential Training</div>
+                    <a href="https://www.linkedin.com/learning/certificates/bcea59b744a29bd875ecb1b5b212eb71c8f7d243685fd709702966ecf0a464bf" class="cert-link">View Certificate</a>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-title">Agile Foundations</div>
+                    <a href="https://www.linkedin.com/learning/certificates/2024ec3f93658e5965c47dd06d2bb5ef2f10525bbc65fa6649945e1383d499c6" class="cert-link">View Certificate</a>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-title">Introduction to Career Skills in Software Development</div>
+                    <a href="https://www.linkedin.com/learning/certificates/145868560ca4b173bfd146afc1bbb6dca2e495e789ffce1bdb9fe8b5e39e1d6d" class="cert-link">View Certificate</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects -->
+        <div class="section projects-section">
+            <h2 class="section-title">
+                <i class="fas fa-project-diagram"></i>
+                Featured Projects
+            </h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <h3 class="project-title">Social Media Application</h3>
+                    <p class="project-description">A full-stack social media platform enabling secure user interaction through public and private profiles, personalized feeds, and real-time engagement.</p>
+                    <ul class="project-features">
+                        <li>User authentication with email verification and password reset</li>
+                        <li>Private and public user accounts with follow requests</li>
+                        <li>Activity score-based post feed ranking</li>
+                        <li>Create, like, comment, bookmark, and delete posts with image uploads</li>
+                        <li>Follow/unfollow users and view user profiles</li>
+                        <li>Profile bio, follower/following counts, and post counts</li>
+                        <li>Notifications for likes, comments, and follow requests</li>
+                    </ul>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Golang (REST API)</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">sqlx</span>
+                        <span class="tech-tag">Cloudinary (image uploads)</span>
+                        <span class="tech-tag">React.js</span>
+                        <span class="tech-tag"> TypeScript</span>
+                        <span class="tech-tag">Tailwind CSS</span>
+                        <span class="tech-tag"> ShadCN UI</span>
+                        <span class="tech-tag"> react-hook-form</span>
+                        <span class="tech-tag">Zod</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/dhruv15803/go-social-media-ui" class="project-link">
+                            <i class="fab fa-github"></i>
+                            Frontend
+                        </a>
+                        <a href="https://github.com/dhruv15803/go-social-media-app" class="project-link">
+                            <i class="fab fa-github"></i>
+                            Backend
+                        </a>
+                        <a href="#" class="project-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            Live Demo
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">Food Ordering Application</h3>
+                    <p class="project-description">A comprehensive food ordering platform connecting customers with restaurants.</p>
+                    <ul class="project-features">
+                        <li>User registration and food ordering system</li>
+                        <li>Restaurant owner registration and management</li>
+                        <li>Owner dashboard for menu management</li>
+                        <li>Add, edit, and delete menu items</li>
+                    </ul>
+                    <div class="tech-stack">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">Express</span>
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">ShadCN UI</span>
+                        <span class="tech-tag">Tailwind CSS</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/dhruv15803/YummyEats" class="project-link">
+                            <i class="fab fa-github"></i>
+                            Github
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
